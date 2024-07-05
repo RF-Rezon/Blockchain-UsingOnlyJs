@@ -27,6 +27,17 @@ class BLockchain {
         newBlock.hash = newBlock.calculateHash();
         this.chain.push(newBlock);
     }
+    isBlockChainValidate(){
+        for(let i=1; i< this.chain.length; i++){
+            const currentBlock = this.chain[i]; 
+            const previousBlock = this.chain[i - 1]; 
+
+            if(currentBlock.hash !== currentBlock.calculateHash()) return false;
+            if(currentBlock.previousHash !== previousBlock.hash) return false;
+
+            return true;
+        }
+    }
 }
 
 const blockChain = new BLockchain();
@@ -35,4 +46,8 @@ const block2 = new Block("7-Jul-2024", { cash: 200 });
 
 blockChain.addBlock(block1)
 blockChain.addBlock(block2)
-console.log(blockChain);
+
+console.log(blockChain.isBlockChainValidate());
+
+blockChain.chain[1].data = "Hacked";
+console.log(blockChain.isBlockChainValidate());
