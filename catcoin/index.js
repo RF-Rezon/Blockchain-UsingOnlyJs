@@ -14,4 +14,16 @@ class Block {
 
 const block = new Block("5-Jul-2024", {cash: 100}, "ABCD");
 
-console.log(block);
+class BLockchain {
+    constructor(){
+        this.chain = [];
+    }
+    addBlock(preViousBlock){
+        this.chain.push(preViousBlock)
+    }
+}
+const blockChain = new BLockchain();
+
+blockChain.addBlock(block)
+
+console.log(blockChain);
